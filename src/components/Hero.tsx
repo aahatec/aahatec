@@ -85,28 +85,43 @@ export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
                       
                       {/* Vibrating Bus Wrapper */}
                       <div className="animate-bus-vibrate flex flex-col items-center justify-center">
-                        {/* Rich Bus SVG Icon with gradients and headlights */}
-                        <svg className="w-10 h-10 mx-auto drop-shadow-[0_4px_12px_rgba(207,69,0,0.5)]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          {/* Bus Body Side Trim/Shadow */}
-                          <rect x="4.5" y="3.5" width="15" height="14" rx="2.5" fill="#B83D00" />
-                          {/* Bus Main Body with Gradient */}
-                          <rect x="4" y="3" width="16" height="14" rx="3" fill="url(#richBusBodyGrad)" />
-                          {/* Windshield */}
-                          <rect x="5.5" y="4.5" width="13" height="4.5" rx="1" fill="#0F172A" />
-                          <path d="M5.5 8h13" stroke="#334155" strokeWidth="0.75" />
-                          {/* Bumper Grill */}
-                          <rect x="8" y="12.5" width="8" height="2" rx="0.5" fill="#334155" />
-                          {/* Headlights (Glowing) */}
-                          <circle cx="6.5" cy="13.5" r="1" fill="#FEF08A" />
-                          <circle cx="6.5" cy="13.5" r="2.5" fill="#FEF08A" className="animate-pulse opacity-45" />
-                          <circle cx="17.5" cy="13.5" r="1" fill="#FEF08A" />
-                          <circle cx="17.5" cy="13.5" r="2.5" fill="#FEF08A" className="animate-pulse opacity-45" />
-                          {/* Wheels */}
-                          <rect x="5.5" y="17" width="2.5" height="2.5" rx="0.5" fill="#020617" />
-                          <rect x="16" y="17" width="2.5" height="2.5" rx="0.5" fill="#020617" />
+                        {/* Side Profile Bus SVG with gradients and rotating wheels */}
+                        <svg className="w-16 h-8 mx-auto drop-shadow-[0_4px_12px_rgba(207,69,0,0.4)]" viewBox="0 0 32 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          {/* Bus Body */}
+                          <path d="M2 10V4.5C2 3.67 2.67 3 3.5 3h24C28.33 3 29 3.67 29 4.5V10c0 .83-.67 1.5-1.5 1.5H3.5A1.5 1.5 0 0 1 2 10z" fill="url(#busSideBodyGrad)" />
+                          {/* Hood at front right */}
+                          <path d="M29 7v3.5c0 .83-.67 1.5-1.5 1.5h-2.5V7h4z" fill="url(#busSideBodyGrad)" />
+                          <path d="M25 7h4L27.5 4H25v3z" fill="#0F172A" /> {/* Front windshield */}
                           
+                          {/* Passenger Windows */}
+                          <rect x="4.5" y="4.5" width="3" height="3" rx="0.5" fill="#1E293B" />
+                          <rect x="9" y="4.5" width="3" height="3" rx="0.5" fill="#1E293B" />
+                          <rect x="13.5" y="4.5" width="3" height="3" rx="0.5" fill="#1E293B" />
+                          <rect x="18" y="4.5" width="3" height="3" rx="0.5" fill="#1E293B" />
+                          
+                          {/* Door */}
+                          <rect x="22.5" y="4.5" width="2" height="7" rx="0.5" fill="#0F172A" />
+                          
+                          {/* Wheel Left Group */}
+                          <g className="wheel-left">
+                            <circle cx="8" cy="12.5" r="2.5" fill="#0F172A" />
+                            <circle cx="8" cy="12.5" r="1" fill="#94A3B8" />
+                            {/* Spokes/detailing inside wheel */}
+                            <line x1="8" y1="10.5" x2="8" y2="14.5" stroke="#0F172A" strokeWidth="0.5" />
+                            <line x1="6" y1="12.5" x2="10" y2="12.5" stroke="#0F172A" strokeWidth="0.5" />
+                          </g>
+                          
+                          {/* Wheel Right Group */}
+                          <g className="wheel-right">
+                            <circle cx="22" cy="12.5" r="2.5" fill="#0F172A" />
+                            <circle cx="22" cy="12.5" r="1" fill="#94A3B8" />
+                            {/* Spokes/detailing inside wheel */}
+                            <line x1="22" y1="10.5" x2="22" y2="14.5" stroke="#0F172A" strokeWidth="0.5" />
+                            <line x1="20" y1="12.5" x2="24" y2="12.5" stroke="#0F172A" strokeWidth="0.5" />
+                          </g>
+
                           <defs>
-                            <linearGradient id="richBusBodyGrad" x1="12" y1="3" x2="12" y2="17" gradientUnits="userSpaceOnUse">
+                            <linearGradient id="busSideBodyGrad" x1="15.5" y1="3" x2="15.5" y2="11.5" gradientUnits="userSpaceOnUse">
                               <stop stopColor="#FF7A45" />
                               <stop stopColor="#D94600" />
                             </linearGradient>
