@@ -17,12 +17,10 @@ export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
     return () => clearInterval(interval);
   }, []);
 
-  // Truck RFID TAT: scales 0.0 to 18.4 over 8s, holds, resets at 9s
-  let tat = "0.0";
+  // Truck RFID TAT: scales 0.0 to 18.4 over 8s, holds at 18.4 while stopped (8s to 10s)
+  let tat = "18.4";
   if (elapsed < 8.0) {
     tat = ((elapsed / 8.0) * 18.4).toFixed(1);
-  } else if (elapsed < 9.0) {
-    tat = "18.4";
   }
 
   // Live School Buses: fixed constant of 48 active units
