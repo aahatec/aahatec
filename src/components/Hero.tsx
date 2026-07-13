@@ -308,6 +308,26 @@ export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
           </div>
           
         </div>
+
+        {/* Statistics Metric Row */}
+        <div className="mt-16 md:mt-24 pt-8 md:pt-10 border-t border-ink-black/[0.06] grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 text-center">
+          <div className="flex flex-col items-center">
+            <span className="text-3xl md:text-5xl font-bold text-signal-orange font-mono">500+</span>
+            <span className="text-xs md:text-sm font-semibold uppercase tracking-wider text-slate-gray mt-2">Clients Served</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <span className="text-3xl md:text-5xl font-bold text-ink-black font-mono">15+</span>
+            <span className="text-xs md:text-sm font-semibold uppercase tracking-wider text-slate-gray mt-2">Years Experience</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <span className="text-3xl md:text-5xl font-bold text-ink-black font-mono">50K+</span>
+            <span className="text-xs md:text-sm font-semibold uppercase tracking-wider text-slate-gray mt-2">Vehicles Tracked</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <span className="text-3xl md:text-5xl font-bold text-ink-black font-mono">99.9%</span>
+            <span className="text-xs md:text-sm font-semibold uppercase tracking-wider text-slate-gray mt-2">Uptime SLA</span>
+          </div>
+        </div>
       </div>
     </section>
   );
