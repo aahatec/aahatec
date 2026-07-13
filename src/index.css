@@ -91,13 +91,15 @@ html {
 
 /* Animated bus travel along custom SVG path on the dashboard map */
 .animated-bus-on-path {
-  offset-path: path("M 35 130 C 80 40, 160 160, 220 50, 305 110");
-  offset-rotate: auto;
+  position: absolute;
   animation: travelPath 8s infinite linear;
 }
 @keyframes travelPath {
-  0% { offset-distance: 0%; }
-  100% { offset-distance: 100%; }
+  0% { left: 40px; top: 110px; transform: translate(-20px, -10px) rotate(-45deg); }
+  25% { left: 100px; top: 65px; transform: translate(-20px, -10px) rotate(0deg); }
+  50% { left: 165px; top: 95px; transform: translate(-20px, -10px) rotate(20deg); }
+  75% { left: 235px; top: 35px; transform: translate(-20px, -10px) rotate(-35deg); }
+  100% { left: 300px; top: 80px; transform: translate(-20px, -10px) rotate(25deg); }
 }
 
 /* Map wheel rotation styles */

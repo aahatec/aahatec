@@ -57,7 +57,7 @@ export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
             <div className="relative w-full max-w-[480px] aspect-[4/3] rounded-[40px] overflow-hidden shadow-[0_24px_48px_rgba(0,0,0,0.06)] border border-white/50">
               
               {/* Simulated Vehicle Dashboard / Map Background - Solid Ink-Black for High Contrast */}
-              <div className="absolute inset-0 bg-[#141413] flex flex-col justify-between p-8 text-canvas-cream">
+              <div className="absolute inset-0 bg-[#141413] flex flex-col justify-between p-5 md:p-6 text-canvas-cream">
                 
                  {/* Dashboard Header */}
                 <div className="flex justify-between items-center bg-white/10 backdrop-blur-md rounded-full px-5 py-2 gap-3 overflow-hidden">
@@ -69,13 +69,13 @@ export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
                 </div>
 
                 {/* Big Dashboard Visuals - Live Route Map Tracker */}
-                <div className="my-auto w-full flex flex-col items-center py-2">
-                  <div className="relative w-full max-w-[380px] h-[190px] bg-neutral-950 border border-white/10 rounded-[28px] overflow-hidden p-4 shadow-inner">
+                <div className="my-auto w-full flex flex-col items-center py-1">
+                  <div className="relative w-full max-w-[380px] h-[150px] bg-neutral-950 border border-white/10 rounded-[28px] overflow-hidden p-4 shadow-inner">
                     {/* Map Grid Pattern Background */}
                     <div className="absolute inset-0 opacity-[0.07] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:16px_16px]"></div>
                     
                     {/* Route Path Graphic */}
-                    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 340 190">
+                    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 340 150">
                       {/* Glow Filter for Active Route */}
                       <defs>
                         <filter id="routeGlow" x="-20%" y="-20%" width="140%" height="140%">
@@ -90,9 +90,18 @@ export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
                         </radialGradient>
                       </defs>
                       
+                      {/* Abstract Map Background Roads / Topography (gives it a real map feel) */}
+                      <path d="M 0 50 Q 120 70 200 20 T 340 90" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="6" />
+                      <path d="M 100 0 Q 120 120 80 150" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="4" />
+                      <path d="M 240 0 Q 200 90 280 150" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="4" />
+                      
+                      {/* Abstract landmass / park outline */}
+                      <path d="M 50 20 Q 90 10 110 50 T 60 70 Z" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.03)" strokeWidth="0.75" />
+                      <path d="M 220 100 Q 270 110 250 140 T 200 135 Z" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.03)" strokeWidth="0.75" />
+
                       {/* Static Route Guideline */}
                       <path 
-                        d="M 35 130 C 80 40, 160 160, 220 50, 305 110" 
+                        d="M 40 110 C 90 30 150 140 210 50 C 240 10 280 60 300 80" 
                         fill="none" 
                         stroke="rgba(255,255,255,0.08)" 
                         strokeWidth="4" 
@@ -101,7 +110,7 @@ export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
                       
                       {/* Animated Glowing Active Track Line */}
                       <path 
-                        d="M 35 130 C 80 40, 160 160, 220 50, 305 110" 
+                        d="M 40 110 C 90 30 150 140 210 50 C 240 10 280 60 300 80" 
                         fill="none" 
                         stroke="#F37338" 
                         strokeWidth="2.5" 
@@ -110,13 +119,13 @@ export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
                         strokeDasharray="6, 4"
                       />
                       
-                      {/* Source Node (Start Point) */}
-                      <circle cx="35" cy="130" r="6" fill="#F37338" />
-                      <circle cx="35" cy="130" r="14" fill="url(#pointGrad)" className="animate-ping opacity-45" />
+                      {/* Source Node (Start Point A - Fully Connected) */}
+                      <circle cx="40" cy="110" r="5" fill="#F37338" />
+                      <circle cx="40" cy="110" r="12" fill="url(#pointGrad)" className="animate-ping opacity-45" />
                       
-                      {/* Destination Node (End Point) */}
-                      <circle cx="305" cy="110" r="6" fill="#25D366" />
-                      <circle cx="305" cy="110" r="14" fill="url(#pointGrad)" className="animate-ping opacity-45" />
+                      {/* Destination Node (End Point B - Fully Connected) */}
+                      <circle cx="300" cy="80" r="5" fill="#25D366" />
+                      <circle cx="300" cy="80" r="12" fill="url(#pointGrad)" className="animate-ping opacity-45" />
                     </svg>
                     
                     {/* Moving Bus element (animated along the offset path) */}
@@ -158,23 +167,23 @@ export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
                     </div>
 
                     {/* Map Labels */}
-                    <div className="absolute top-3 left-4 bg-black/60 backdrop-blur-sm rounded-md px-2 py-0.5 border border-white/5 select-none pointer-events-none">
-                      <span className="text-[10px] font-bold text-neutral-400">DEPOT: School Start</span>
+                    <div className="absolute top-2.5 left-4 bg-black/60 backdrop-blur-sm rounded-md px-2 py-0.5 border border-white/5 select-none pointer-events-none">
+                      <span className="text-[9px] font-bold text-neutral-400">DEPOT: School Start</span>
                     </div>
-                    <div className="absolute bottom-3 right-4 bg-black/60 backdrop-blur-sm rounded-md px-2 py-0.5 border border-white/5 select-none pointer-events-none">
-                      <span className="text-[10px] font-bold text-[#25D366]">Anand HQ Hub</span>
+                    <div className="absolute bottom-2.5 right-4 bg-black/60 backdrop-blur-sm rounded-md px-2 py-0.5 border border-white/5 select-none pointer-events-none">
+                      <span className="text-[9px] font-bold text-[#25D366]">Anand HQ Hub</span>
                     </div>
                     
                     {/* Live Status indicator */}
-                    <div className="absolute bottom-3 left-4 bg-[#25D366]/10 border border-[#25D366]/30 rounded-full px-3 py-1 flex items-center gap-1.5 select-none pointer-events-none">
+                    <div className="absolute bottom-2.5 left-4 bg-[#25D366]/10 border border-[#25D366]/30 rounded-full px-3 py-0.5 flex items-center gap-1 select-none pointer-events-none">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse"></span>
-                      <span className="text-[10px] font-bold text-[#25D366] uppercase">Active Transit</span>
+                      <span className="text-[9px] font-bold text-[#25D366] uppercase">Active Transit</span>
                     </div>
                   </div>
 
                   {/* ADAS Alert overlay mockup */}
-                  <div className="mt-4 bg-signal-orange/20 border border-signal-orange text-signal-orange px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider animate-pulse flex items-center gap-1.5">
-                    <Cpu size={14} /> ADAS: Distance Warning - 3.2m
+                  <div className="mt-3.5 bg-signal-orange/20 border border-signal-orange text-signal-orange px-4 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider animate-pulse flex items-center gap-1.5">
+                    <Cpu size={12} /> ADAS: Distance Warning - 3.2m
                   </div>
                 </div>
 
