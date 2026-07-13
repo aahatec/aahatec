@@ -108,7 +108,7 @@ export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
                         strokeLinecap="round" 
                       />
                       
-                      {/* Animated Glowing Active Track Line */}
+                      {/* Animated Glowing Active Track Line (Draws behind wheels) */}
                       <path 
                         d="M 40 110 C 90 30 150 140 210 50 C 240 10 280 60 300 80" 
                         fill="none" 
@@ -116,7 +116,9 @@ export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
                         strokeWidth="2.5" 
                         strokeLinecap="round" 
                         filter="url(#routeGlow)"
-                        strokeDasharray="6, 4"
+                        strokeDasharray="300"
+                        strokeDashoffset="300"
+                        className="animate-route-draw"
                       />
                       
                       {/* Source Node (Start Point A - Fully Connected) */}
@@ -126,45 +128,76 @@ export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
                       {/* Destination Node (End Point B - Fully Connected) */}
                       <circle cx="300" cy="80" r="5" fill="#25D366" />
                       <circle cx="300" cy="80" r="12" fill="url(#pointGrad)" className="animate-ping opacity-45" />
-                    </svg>
-                    
-                    {/* Moving Bus element (animated along the offset path) */}
-                    <div className="absolute inset-0 pointer-events-none">
-                      <div className="animated-bus-on-path w-10 h-5">
-                        {/* Bus Icon */}
-                        <svg className="w-10 h-5 drop-shadow-[0_2px_6px_rgba(207,69,0,0.5)]" viewBox="0 0 32 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M2 10V4.5C2 3.67 2.67 3 3.5 3h24C28.33 3 29 3.67 29 4.5V10c0 .83-.67 1.5-1.5 1.5H3.5A1.5 1.5 0 0 1 2 10z" fill="url(#busSideBodyGradMap)" />
-                          <path d="M29 7v3.5c0 .83-.67 1.5-1.5 1.5h-2.5V7h4z" fill="url(#busSideBodyGradMap)" />
-                          <path d="M25 7h4L27.5 4H25v3z" fill="#0F172A" />
-                          <rect x="4.5" y="4.5" width="3" height="3" rx="0.5" fill="#1E293B" />
-                          <rect x="9" y="4.5" width="3" height="3" rx="0.5" fill="#1E293B" />
-                          <rect x="13.5" y="4.5" width="3" height="3" rx="0.5" fill="#1E293B" />
-                          <rect x="18" y="4.5" width="3" height="3" rx="0.5" fill="#1E293B" />
-                          <rect x="22.5" y="4.5" width="2" height="7" rx="0.5" fill="#0F172A" />
-                          
-                          <g className="wheel-left-map">
-                            <circle cx="8" cy="12.5" r="2.5" fill="#0F172A" />
-                            <circle cx="8" cy="12.5" r="1" fill="#94A3B8" />
-                            <line x1="8" y1="10.5" x2="8" y2="14.5" stroke="#0F172A" strokeWidth="0.5" />
-                            <line x1="6" y1="12.5" x2="10" y2="12.5" stroke="#0F172A" strokeWidth="0.5" />
-                          </g>
-                          
-                          <g className="wheel-right-map">
-                            <circle cx="22" cy="12.5" r="2.5" fill="#0F172A" />
-                            <circle cx="22" cy="12.5" r="1" fill="#94A3B8" />
-                            <line x1="22" y1="10.5" x2="22" y2="14.5" stroke="#0F172A" strokeWidth="0.5" />
-                            <line x1="20" y1="12.5" x2="24" y2="12.5" stroke="#0F172A" strokeWidth="0.5" />
-                          </g>
 
-                          <defs>
-                            <linearGradient id="busSideBodyGradMap" x1="15.5" y1="3" x2="15.5" y2="11.5" gradientUnits="userSpaceOnUse">
-                              <stop stopColor="#FF7A45" />
-                              <stop stopColor="#D94600" />
-                            </linearGradient>
-                          </defs>
-                        </svg>
-                      </div>
-                    </div>
+                      {/* Dynamic Traveling School Bus (Mathematically connected to the active path) */}
+                      <g>
+                        <animateMotion 
+                          dur="8s" 
+                          repeatCount="indefinite" 
+                          rotate="auto"
+                          path="M 40 110 C 90 30 150 140 210 50 C 240 10 280 60 300 80"
+                        />
+                        {/* Highly Realistic School Bus Vector */}
+                        <g transform="translate(-20, -13)">
+                          {/* Rear Bumper */}
+                          <rect x="0" y="10" width="1.5" height="4" rx="0.5" fill="#334155" />
+                          {/* Front Bumper */}
+                          <rect x="38.5" y="11" width="1.5" height="3" rx="0.5" fill="#334155" />
+                          
+                          {/* Wheel Wells (Fender cutouts) */}
+                          <circle cx="9" cy="13" r="4.5" fill="#141413" />
+                          <circle cx="29" cy="13" r="4.5" fill="#141413" />
+                          
+                          {/* Main Yellow Bus Body */}
+                          <path d="M 1.5 3 L 30 3 L 30 7 L 38 7 C 38.5 7 39 7.5 39 8 L 39 12 C 39 12.5 38.5 13 38 13 L 1.5 13 C 0.8 13 0.2 12.4 0.2 11.7 L 0.2 4.3 C 0.2 3.6 0.8 3 1.5 3 Z" fill="url(#busSideBodyGradMap)" />
+                          
+                          {/* Black rub rails */}
+                          <rect x="1" y="9.5" width="37" height="0.75" fill="#0F172A" />
+                          <rect x="1" y="11.5" width="37" height="0.5" fill="#0F172A" />
+                          
+                          {/* Windshield */}
+                          <path d="M 30.5 4.5 L 35.5 4.5 L 34.5 7.5 L 30.5 7.5 Z" fill="#0F172A" />
+                          
+                          {/* Passenger Windows */}
+                          <rect x="2" y="4.5" width="3.5" height="3" fill="#1E293B" stroke="#475569" strokeWidth="0.5" />
+                          <rect x="6.5" y="4.5" width="3.5" height="3" fill="#1E293B" stroke="#475569" strokeWidth="0.5" />
+                          <rect x="11" y="4.5" width="3.5" height="3" fill="#1E293B" stroke="#475569" strokeWidth="0.5" />
+                          <rect x="15.5" y="4.5" width="3.5" height="3" fill="#1E293B" stroke="#475569" strokeWidth="0.5" />
+                          <rect x="20" y="4.5" width="3.5" height="3" fill="#1E293B" stroke="#475569" strokeWidth="0.5" />
+                          
+                          {/* Folding Entry Door */}
+                          <rect x="24.5" y="4.5" width="4" height="8.5" fill="#0F172A" stroke="#475569" strokeWidth="0.5" />
+                          <line x1="26.5" y1="4.5" x2="26.5" y2="13" stroke="#475569" strokeWidth="0.5" />
+                          
+                          {/* Left Spinning Wheel */}
+                          <g className="wheel-left-map">
+                            <circle cx="9" cy="13" r="3.5" fill="#0F172A" />
+                            <circle cx="9" cy="13" r="1.5" fill="#94A3B8" />
+                            <line x1="9" y1="10" x2="9" y2="16" stroke="#0F172A" strokeWidth="0.5" />
+                            <line x1="6" y1="13" x2="12" y2="13" stroke="#0F172A" strokeWidth="0.5" />
+                          </g>
+                          
+                          {/* Right Spinning Wheel */}
+                          <g className="wheel-right-map">
+                            <circle cx="29" cy="13" r="3.5" fill="#0F172A" />
+                            <circle cx="29" cy="13" r="1.5" fill="#94A3B8" />
+                            <line x1="29" y1="10" x2="29" y2="16" stroke="#0F172A" strokeWidth="0.5" />
+                            <line x1="26" y1="13" x2="32" y2="13" stroke="#0F172A" strokeWidth="0.5" />
+                          </g>
+                          
+                          {/* Flashing safety beacon lights */}
+                          <circle cx="1.5" cy="4" r="0.75" fill="#EF4444" />
+                          <circle cx="29" cy="4" r="0.75" fill="#F59E0B" />
+                        </g>
+
+                        <defs>
+                          <linearGradient id="busSideBodyGradMap" x1="15.5" y1="3" x2="15.5" y2="13" gradientUnits="userSpaceOnUse">
+                            <stop stopColor="#FF7A45" />
+                            <stop stopColor="#D94600" />
+                          </linearGradient>
+                        </defs>
+                      </g>
+                    </svg>
 
                     {/* Map Labels */}
                     <div className="absolute top-2.5 left-4 bg-black/60 backdrop-blur-sm rounded-md px-2 py-0.5 border border-white/5 select-none pointer-events-none">

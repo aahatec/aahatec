@@ -89,25 +89,21 @@ html {
   to { transform: rotate(360deg); }
 }
 
-/* Animated bus travel along custom SVG path on the dashboard map */
-.animated-bus-on-path {
-  position: absolute;
-  animation: travelPath 8s infinite linear;
+/* Animated active route tracing path */
+.animate-route-draw {
+  animation: routeDraw 8s infinite linear;
 }
-@keyframes travelPath {
-  0% { left: 40px; top: 110px; transform: translate(-20px, -10px) rotate(-45deg); }
-  25% { left: 100px; top: 65px; transform: translate(-20px, -10px) rotate(0deg); }
-  50% { left: 165px; top: 95px; transform: translate(-20px, -10px) rotate(20deg); }
-  75% { left: 235px; top: 35px; transform: translate(-20px, -10px) rotate(-35deg); }
-  100% { left: 300px; top: 80px; transform: translate(-20px, -10px) rotate(25deg); }
+@keyframes routeDraw {
+  0% { stroke-dashoffset: 300; }
+  100% { stroke-dashoffset: 0; }
 }
 
 /* Map wheel rotation styles */
 .wheel-left-map {
-  transform-origin: 8px 12.5px;
+  transform-origin: 9px 13px;
   animation: wheelSpin 0.25s infinite linear;
 }
 .wheel-right-map {
-  transform-origin: 22px 12.5px;
+  transform-origin: 29px 13px;
   animation: wheelSpin 0.25s infinite linear;
 }
