@@ -194,13 +194,19 @@ export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
                         className="animate-route-draw"
                       />
                       
-                      {/* Source Node (Start Point A - Fully Connected) */}
+                      {/* Source Node (Start Point A - Orange Core & Pulse) */}
                       <circle cx="40" cy="110" r="5" fill="#F37338" />
-                      <circle cx="40" cy="110" r="12" fill="url(#pointGrad)" className="animate-ping opacity-45" />
+                      <circle cx="40" cy="110" r="5" fill="#F37338" opacity="0.6">
+                        <animate attributeName="r" values="5;15" dur="2s" repeatCount="indefinite" />
+                        <animate attributeName="opacity" values="0.6;0" dur="2s" repeatCount="indefinite" />
+                      </circle>
                       
-                      {/* Destination Node (End Point B - Fully Connected) */}
+                      {/* Destination Node (End Point B - Green Core & Pulse) */}
                       <circle cx="300" cy="80" r="5" fill="#25D366" />
-                      <circle cx="300" cy="80" r="12" fill="url(#pointGrad)" className="animate-ping opacity-45" />
+                      <circle cx="300" cy="80" r="5" fill="#25D366" opacity="0.6">
+                        <animate attributeName="r" values="5;15" dur="2s" repeatCount="indefinite" />
+                        <animate attributeName="opacity" values="0.6;0" dur="2s" repeatCount="indefinite" />
+                      </circle>
 
                       {/* Dynamic Traveling School Bus (Mathematically connected to the active path) */}
                       <g>
