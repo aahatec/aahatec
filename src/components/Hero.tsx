@@ -1,4 +1,5 @@
-import { ArrowRight, Cpu } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ArrowRight, Cpu, ShieldCheck, AlertTriangle } from 'lucide-react';
 
 interface HeroProps {
   onExploreProducts: () => void;
@@ -6,6 +7,67 @@ interface HeroProps {
 }
 
 export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
+  const [elapsed, setElapsed] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const currentMs = Date.now() % 10000;
+      setElapsed(currentMs / 1000);
+    }, 50);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Truck RFID TAT: scales 0.0 to 18.4 over 8s, holds, resets at 9s
+  let tat = "0.0";
+  if (elapsed < 8.0) {
+    tat = ((elapsed / 8.0) * 18.4).toFixed(1);
+  } else if (elapsed < 9.0) {
+    tat = "18.4";
+  }
+
+  // Live School Buses: scales 0 to 48 over 8s, holds, resets at 9s
+  let buses = 0;
+  if (elapsed < 8.0) {
+    buses = Math.floor((elapsed / 8.0) * 48);
+  } else if (elapsed < 9.0) {
+    buses = 48;
+  }
+
+  // ADAS Alerts Logs: 1 critical during obstacle approach (4.5s to 6.5s)
+  const isCritical = elapsed >= 4.5 && elapsed < 6.5;
+  const criticalLogs = isCritical ? 1 : 0;
+
+  // ADAS Warning Alert Pill configuration
+  let alertText = "ADAS: SCANNING ROAD - SYSTEM SAFE";
+  let alertClass = "bg-green-500/10 border-green-500/30 text-green-400";
+  let AlertIcon = ShieldCheck;
+
+  if (elapsed >= 3.5 && elapsed < 4.2) {
+    alertText = "ADAS: WARNING - OBSTACLE AHEAD 12.4m";
+    alertClass = "bg-amber-500/15 border-amber-500 text-amber-500";
+    AlertIcon = AlertTriangle;
+  } else if (elapsed >= 4.2 && elapsed < 5.0) {
+    alertText = "ADAS: WARNING - OBSTACLE AHEAD 8.2m";
+    alertClass = "bg-amber-500/15 border-amber-500 text-amber-500 animate-pulse";
+    AlertIcon = AlertTriangle;
+  } else if (elapsed >= 5.0 && elapsed < 5.8) {
+    alertText = "ADAS: CRITICAL - DISTANCE WARNING 3.2m";
+    alertClass = "bg-signal-orange/20 border-signal-orange text-signal-orange animate-pulse";
+    AlertIcon = AlertTriangle;
+  } else if (elapsed >= 5.8 && elapsed < 6.5) {
+    alertText = "ADAS: WARNING - OBSTACLE CLEARING 6.1m";
+    alertClass = "bg-amber-500/15 border-amber-500 text-amber-500";
+    AlertIcon = AlertTriangle;
+  } else if (elapsed >= 6.5 && elapsed < 9.0) {
+    alertText = "ADAS: ROAD CLEAR - SYSTEM SAFE";
+    alertClass = "bg-green-500/10 border-green-500/30 text-green-400";
+    AlertIcon = ShieldCheck;
+  } else if (elapsed >= 9.0) {
+    alertText = "ADAS: STANDBY - WAITING FOR TELEMETRY";
+    alertClass = "bg-white/5 border-white/10 text-neutral-400";
+    AlertIcon = Cpu;
+  }
+
   return (
     <section className="relative min-h-[calc(100vh-104px)] flex items-center overflow-hidden py-12 md:py-16">
       
@@ -218,8 +280,8 @@ export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
                   </div>
 
                   {/* ADAS Alert overlay mockup */}
-                  <div className="mt-3.5 bg-signal-orange/20 border border-signal-orange text-signal-orange px-4 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider animate-pulse flex items-center gap-1.5">
-                    <Cpu size={12} /> ADAS: Distance Warning - 3.2m
+                  <div className={`mt-3.5 border px-4 py-1 rounded-full text-[9px] md:text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all duration-300 ${alertClass}`}>
+                    <AlertIcon size={12} className={AlertIcon === AlertTriangle ? 'animate-bounce' : ''} /> {alertText}
                   </div>
                 </div>
 
@@ -227,15 +289,17 @@ export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
                 <div className="grid grid-cols-3 gap-4 pt-4 border-t border-white/10 text-center text-xs">
                   <div>
                     <p className="text-neutral-400 mb-1">Truck RFID TAT</p>
-                    <p className="font-semibold text-sm">18.4 mins avg</p>
+                    <p className="font-semibold text-sm font-mono">{tat} mins avg</p>
                   </div>
                   <div>
                     <p className="text-neutral-400 mb-1">Live School Buses</p>
-                    <p className="font-semibold text-sm">48 Active</p>
+                    <p className="font-semibold text-sm font-mono">{buses} Active</p>
                   </div>
                   <div>
                     <p className="text-neutral-400 mb-1">ADAS Alerts Logs</p>
-                    <p className="font-semibold text-sm text-green-400">0 critical</p>
+                    <p className={`font-semibold text-sm font-mono transition-colors duration-300 ${criticalLogs > 0 ? 'text-red-500 font-bold' : 'text-green-400'}`}>
+                      {criticalLogs} critical
+                    </p>
                   </div>
                 </div>
 
