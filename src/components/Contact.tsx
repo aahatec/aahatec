@@ -4,7 +4,7 @@ export default function Contact() {
   return (
     <section id="contact" className="py-28 max-w-7xl mx-auto px-6 md:px-12 text-left">
       
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start mb-16">
         
         {/* Contact details */}
         <div className="lg:col-span-5 flex flex-col justify-between h-full">
@@ -53,8 +53,8 @@ export default function Contact() {
                 <div>
                   <h4 className="font-bold text-base md:text-lg text-ink-black">Phone Details</h4>
                   <p className="text-base text-slate-gray mt-1 font-mono font-normal">
-                    +91 94275 96900 (Sales & Support)<br />
-                    +91 26 9223 0110 (Office Direct)
+                    <a href="tel:+919427596900" className="hover:text-signal-orange transition-colors font-semibold">+91 94275 96900</a> (Sales & Support)<br />
+                    <a href="tel:+912692230110" className="hover:text-signal-orange transition-colors font-semibold">+91 2692 230110</a> (Office Direct)
                   </p>
                 </div>
               </div>
@@ -66,21 +66,12 @@ export default function Contact() {
                 <div>
                   <h4 className="font-bold text-base md:text-lg text-ink-black">Email & Help Desk</h4>
                   <p className="text-base text-slate-gray mt-1 font-mono font-normal">
-                    sales@aahatec.com (Enterprise Quotes)<br />
-                    support@aahatec.com (Technical Support)
+                    <a href="mailto:sales@aahatec.com" className="hover:text-signal-orange transition-colors font-semibold">sales@aahatec.com</a> (Enterprise Quotes)<br />
+                    <a href="mailto:support@aahatec.com" className="hover:text-signal-orange transition-colors font-semibold">support@aahatec.com</a> (Technical Support)
                   </p>
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* Notice pill */}
-          <div className="mt-12 bg-white rounded-[24px] p-6 border border-ink-black/5 shadow-sm text-left">
-            <span className="w-2.5 h-2.5 rounded-full bg-signal-orange inline-block mr-2"></span>
-            <span className="text-sm font-bold uppercase tracking-wider text-ink-black">DEPLOYMENT NOTE</span>
-            <p className="text-sm text-slate-gray mt-2.5 leading-relaxed font-normal">
-              Typical hardware production and delivery leads average 7 to 10 business days. Custom app dashboard integration setup requires a standard 14-day staging window.
-            </p>
           </div>
         </div>
 
@@ -102,6 +93,18 @@ export default function Contact() {
         </div>
 
       </div>
+
+      {/* Deployment Note in full width below the grid */}
+      <div className="bg-white rounded-[32px] p-8 border border-ink-black/5 shadow-sm text-left w-full">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-2.5 h-2.5 rounded-full bg-signal-orange"></span>
+          <span className="text-sm font-bold uppercase tracking-wider text-ink-black">DEPLOYMENT NOTE</span>
+        </div>
+        <p className="text-base text-slate-gray leading-relaxed font-normal">
+          Typical hardware production and delivery leads average 7 to 10 business days. Custom app dashboard integration setup requires a standard 14-day staging window.
+        </p>
+      </div>
+
     </section>
   );
 }
