@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Check, ChevronRight } from 'lucide-react';
 import { PRODUCTS } from '../constants/products';
 
@@ -7,16 +8,25 @@ interface ProductShowcaseProps {
   handleRemoveProduct: (id: string) => void;
 }
 
+const CATEGORIES = ['All', 'Vehicle Tracking', 'RFID Automation', 'Sensors', 'Custom Apps'];
+
 export default function ProductShowcase({ 
   selectedProducts, 
   handleAddProduct, 
   handleRemoveProduct 
 }: ProductShowcaseProps) {
+  const [activeCategory, setActiveCategory] = useState('All');
+
+  // Filter products based on active category selection
+  const filteredProducts = activeCategory === 'All'
+    ? PRODUCTS
+    : PRODUCTS.filter((prod) => prod.category === activeCategory);
+
   return (
     <section id="products" className="py-24 max-w-7xl mx-auto px-6 md:px-12 text-left">
       
       {/* Section Header */}
-      <div className="max-w-2xl mb-16">
+      <div className="max-w-2xl mb-12">
         <div className="flex items-center gap-2 mb-4">
           <span className="w-2 h-2 rounded-full bg-signal-orange"></span>
           <span className="text-xs md:text-sm font-bold uppercase tracking-wider text-slate-gray">
@@ -31,9 +41,26 @@ export default function ProductShowcase({
         </p>
       </div>
 
-      {/* Grid of 9 Products */}
+      {/* Category Filter Tab Bar */}
+      <div className="flex flex-wrap items-center gap-2.5 mb-12 pb-4 border-b border-ink-black/[0.04] select-none">
+        {CATEGORIES.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setActiveCategory(cat)}
+            className={`px-5 py-2 rounded-full text-xs md:text-sm font-semibold tracking-tight transition-all duration-200 cursor-pointer border ${
+              activeCategory === cat
+                ? 'bg-ink-black text-canvas-cream border-ink-black shadow-sm'
+                : 'bg-white text-slate-gray border-ink-black/5 hover:border-ink-black/25 hover:text-ink-black'
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      {/* Grid of Filtered Products */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {PRODUCTS.map((prod) => {
+        {filteredProducts.map((prod) => {
           const qty = selectedProducts[prod.id] || 0;
           return (
             <div 
@@ -43,7 +70,7 @@ export default function ProductShowcase({
               <div>
                 {/* Header */}
                 <div className="flex justify-between items-start gap-4 mb-6">
-                  <span className="bg-canvas-cream text-ink-black px-4 py-1.5 rounded-full text-sm font-semibold uppercase tracking-wider">
+                  <span className="bg-canvas-cream text-ink-black px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider">
                     {prod.category}
                   </span>
                   <span className="text-2xl md:text-3xl font-bold text-ink-black font-mono">
