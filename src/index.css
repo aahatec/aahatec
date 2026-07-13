@@ -95,7 +95,7 @@ html {
 }
 @keyframes routeDraw {
   0% { stroke-dashoffset: 300; }
-  100% { stroke-dashoffset: 0; }
+  93.75%, 100% { stroke-dashoffset: 0; }
 }
 
 /* Map wheel rotation styles */

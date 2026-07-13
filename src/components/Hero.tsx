@@ -135,6 +135,9 @@ export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
                           dur="8s" 
                           repeatCount="indefinite" 
                           rotate="auto"
+                          calcMode="linear"
+                          keyTimes="0; 0.9375; 1"
+                          keyPoints="0; 1; 1"
                           path="M 40 110 C 90 30 150 140 210 50 C 240 10 280 60 300 80"
                         />
                         {/* Highly Realistic School Bus Vector */}
