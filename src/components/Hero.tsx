@@ -37,6 +37,19 @@ export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
   const isCritical = elapsed >= 4.5 && elapsed < 6.5;
   const criticalLogs = isCritical ? 1 : 0;
 
+  // Dynamic GPS Coordinates: interpolate between Depot (22.5560° N, 72.9150° E) and Anand Hub (22.5645° N, 72.9289° E)
+  let currentLat = "22.5560";
+  let currentLon = "72.9150";
+
+  if (elapsed < 8.0) {
+    const ratio = elapsed / 8.0;
+    currentLat = (22.5560 + ratio * (22.5645 - 22.5560)).toFixed(4);
+    currentLon = (72.9150 + ratio * (72.9289 - 72.9150)).toFixed(4);
+  } else if (elapsed < 9.0) {
+    currentLat = "22.5645";
+    currentLon = "72.9289";
+  }
+
   // ADAS Warning Alert Pill configuration
   let alertText = "ADAS: SCANNING ROAD - SYSTEM SAFE";
   let alertClass = "bg-green-500/10 border-green-500/30 text-green-400";
@@ -122,12 +135,17 @@ export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
               <div className="absolute inset-0 bg-[#141413] flex flex-col justify-between p-5 md:p-6 text-canvas-cream">
                 
                  {/* Dashboard Header */}
-                <div className="flex justify-between items-center bg-white/10 backdrop-blur-md rounded-full px-5 py-2 gap-3 overflow-hidden">
-                  <div className="flex items-center gap-2 min-w-0">
-                    <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse flex-shrink-0"></span>
-                    <span className="text-[9px] sm:text-xs font-semibold uppercase tracking-wider whitespace-nowrap truncate">AAHA GPS CLOUD CONNECT</span>
+                <div className="flex justify-between items-center bg-white/10 backdrop-blur-md rounded-full px-4 py-2 gap-2 overflow-hidden w-full">
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse flex-shrink-0"></span>
+                    {/* Responsive title text to prevent overlapping on narrow viewports */}
+                    <span className="text-[8px] sm:text-xs font-semibold uppercase tracking-wider whitespace-nowrap truncate hidden min-[360px]:inline">AAHA CLOUD</span>
+                    <span className="text-[8px] sm:text-xs font-semibold uppercase tracking-wider whitespace-nowrap truncate min-[360px]:hidden inline">AAHA</span>
                   </div>
-                  <span className="text-[9px] sm:text-xs text-canvas-cream/70 font-mono whitespace-nowrap flex-shrink-0">LAT: 19.0760° N | LON: 72.8777° E</span>
+                  {/* Dynamic live coordinates with responsive font size to adapt to mobile screens */}
+                  <span className="text-[7.5px] min-[360px]:text-[8.5px] sm:text-xs text-canvas-cream/70 font-mono whitespace-nowrap flex-shrink-0">
+                    LAT: {currentLat}° N | LON: {currentLon}° E
+                  </span>
                 </div>
 
                 {/* Big Dashboard Visuals - Live Route Map Tracker */}
