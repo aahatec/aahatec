@@ -59,13 +59,13 @@ export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
               {/* Simulated Vehicle Dashboard / Map Background - Solid Ink-Black for High Contrast */}
               <div className="absolute inset-0 bg-[#141413] flex flex-col justify-between p-8 text-canvas-cream">
                 
-                {/* Dashboard Header */}
-                <div className="flex justify-between items-center bg-white/10 backdrop-blur-md rounded-full px-5 py-2">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
-                    <span className="text-xs font-semibold uppercase tracking-wider">AAHA GPS CLOUD CONNECT</span>
+                 {/* Dashboard Header */}
+                <div className="flex justify-between items-center bg-white/10 backdrop-blur-md rounded-full px-5 py-2 gap-3 overflow-hidden">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse flex-shrink-0"></span>
+                    <span className="text-[9px] sm:text-xs font-semibold uppercase tracking-wider whitespace-nowrap truncate">AAHA GPS CLOUD CONNECT</span>
                   </div>
-                  <span className="text-xs text-canvas-cream/70 font-mono">LAT: 19.0760° N | LON: 72.8777° E</span>
+                  <span className="text-[9px] sm:text-xs text-canvas-cream/70 font-mono whitespace-nowrap flex-shrink-0">LAT: 19.0760° N | LON: 72.8777° E</span>
                 </div>
 
                 {/* Big Dashboard Visuals - Live Route Map Tracker */}
