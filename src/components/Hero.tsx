@@ -25,13 +25,8 @@ export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
     tat = "18.4";
   }
 
-  // Live School Buses: scales 0 to 48 over 8s, holds, resets at 9s
-  let buses = 0;
-  if (elapsed < 8.0) {
-    buses = Math.floor((elapsed / 8.0) * 48);
-  } else if (elapsed < 9.0) {
-    buses = 48;
-  }
+  // Live School Buses: fixed constant of 48 active units
+  const buses = 48;
 
   // ADAS Alerts Logs: 1 critical during obstacle approach (4.5s to 6.5s)
   const isCritical = elapsed >= 4.5 && elapsed < 6.5;
