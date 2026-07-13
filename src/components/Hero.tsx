@@ -68,85 +68,110 @@ export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
                   <span className="text-xs text-canvas-cream/70 font-mono">LAT: 19.0760° N | LON: 72.8777° E</span>
                 </div>
 
-                {/* Big Dashboard Visuals */}
-                <div className="my-auto flex flex-col items-center">
-                  <div className="relative w-48 h-48 flex items-center justify-center">
-                    {/* Orbital Trajectory Lines (Rotated CSS) */}
-                    <svg className="absolute w-full h-full animate-orbit" viewBox="0 0 100 100">
-                      <circle cx="50" cy="50" r="45" fill="none" stroke="#F37338" strokeWidth="1" strokeDasharray="5, 3" />
-                      <circle cx="50" cy="50" r="35" fill="none" stroke="#F37338" strokeWidth="1.5" />
-                      <circle cx="85" cy="50" r="4" fill="#CF4500" />
-                      <circle cx="50" cy="15" r="3" fill="#FCFBFA" />
+                {/* Big Dashboard Visuals - Live Route Map Tracker */}
+                <div className="my-auto w-full flex flex-col items-center py-2">
+                  <div className="relative w-full max-w-[380px] h-[190px] bg-neutral-950 border border-white/10 rounded-[28px] overflow-hidden p-4 shadow-inner">
+                    {/* Map Grid Pattern Background */}
+                    <div className="absolute inset-0 opacity-[0.07] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:16px_16px]"></div>
+                    
+                    {/* Route Path Graphic */}
+                    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 340 190">
+                      {/* Glow Filter for Active Route */}
+                      <defs>
+                        <filter id="routeGlow" x="-20%" y="-20%" width="140%" height="140%">
+                          <feGaussianBlur stdDeviation="3" result="blur" />
+                          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                        </filter>
+                        
+                        {/* Map point marker gradient */}
+                        <radialGradient id="pointGrad" cx="50%" cy="50%" r="50%">
+                          <stop offset="0%" stopColor="#FF7A45" />
+                          <stop offset="100%" stopColor="#D94600" stopOpacity="0" />
+                        </radialGradient>
+                      </defs>
+                      
+                      {/* Static Route Guideline */}
+                      <path 
+                        d="M 35 130 C 80 40, 160 160, 220 50, 305 110" 
+                        fill="none" 
+                        stroke="rgba(255,255,255,0.08)" 
+                        strokeWidth="4" 
+                        strokeLinecap="round" 
+                      />
+                      
+                      {/* Animated Glowing Active Track Line */}
+                      <path 
+                        d="M 35 130 C 80 40, 160 160, 220 50, 305 110" 
+                        fill="none" 
+                        stroke="#F37338" 
+                        strokeWidth="2.5" 
+                        strokeLinecap="round" 
+                        filter="url(#routeGlow)"
+                        strokeDasharray="6, 4"
+                      />
+                      
+                      {/* Source Node (Start Point) */}
+                      <circle cx="35" cy="130" r="6" fill="#F37338" />
+                      <circle cx="35" cy="130" r="14" fill="url(#pointGrad)" className="animate-ping opacity-45" />
+                      
+                      {/* Destination Node (End Point) */}
+                      <circle cx="305" cy="110" r="6" fill="#25D366" />
+                      <circle cx="305" cy="110" r="14" fill="url(#pointGrad)" className="animate-ping opacity-45" />
                     </svg>
                     
-                    {/* Inner Circular Fleet Display with Rich Bus Icon */}
-                    {/* Inner Circular Fleet Display with Vibrating Bus and Moving Road */}
-                    <div className="w-28 h-28 bg-white/5 backdrop-blur-md rounded-full border border-white/20 flex flex-col items-center justify-center shadow-inner relative overflow-hidden select-none">
-                      
-                      {/* Vibrating Bus Wrapper */}
-                      <div className="animate-bus-vibrate flex flex-col items-center justify-center">
-                        {/* Side Profile Bus SVG with gradients and rotating wheels */}
-                        <svg className="w-16 h-8 mx-auto drop-shadow-[0_4px_12px_rgba(207,69,0,0.4)]" viewBox="0 0 32 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          {/* Bus Body */}
-                          <path d="M2 10V4.5C2 3.67 2.67 3 3.5 3h24C28.33 3 29 3.67 29 4.5V10c0 .83-.67 1.5-1.5 1.5H3.5A1.5 1.5 0 0 1 2 10z" fill="url(#busSideBodyGrad)" />
-                          {/* Hood at front right */}
-                          <path d="M29 7v3.5c0 .83-.67 1.5-1.5 1.5h-2.5V7h4z" fill="url(#busSideBodyGrad)" />
-                          <path d="M25 7h4L27.5 4H25v3z" fill="#0F172A" /> {/* Front windshield */}
-                          
-                          {/* Passenger Windows */}
+                    {/* Moving Bus element (animated along the offset path) */}
+                    <div className="absolute inset-0 pointer-events-none">
+                      <div className="animated-bus-on-path w-10 h-5">
+                        {/* Bus Icon */}
+                        <svg className="w-10 h-5 drop-shadow-[0_2px_6px_rgba(207,69,0,0.5)]" viewBox="0 0 32 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M2 10V4.5C2 3.67 2.67 3 3.5 3h24C28.33 3 29 3.67 29 4.5V10c0 .83-.67 1.5-1.5 1.5H3.5A1.5 1.5 0 0 1 2 10z" fill="url(#busSideBodyGradMap)" />
+                          <path d="M29 7v3.5c0 .83-.67 1.5-1.5 1.5h-2.5V7h4z" fill="url(#busSideBodyGradMap)" />
+                          <path d="M25 7h4L27.5 4H25v3z" fill="#0F172A" />
                           <rect x="4.5" y="4.5" width="3" height="3" rx="0.5" fill="#1E293B" />
                           <rect x="9" y="4.5" width="3" height="3" rx="0.5" fill="#1E293B" />
                           <rect x="13.5" y="4.5" width="3" height="3" rx="0.5" fill="#1E293B" />
                           <rect x="18" y="4.5" width="3" height="3" rx="0.5" fill="#1E293B" />
-                          
-                          {/* Door */}
                           <rect x="22.5" y="4.5" width="2" height="7" rx="0.5" fill="#0F172A" />
                           
-                          {/* Wheel Left Group */}
-                          <g className="wheel-left">
+                          <g className="wheel-left-map">
                             <circle cx="8" cy="12.5" r="2.5" fill="#0F172A" />
                             <circle cx="8" cy="12.5" r="1" fill="#94A3B8" />
-                            {/* Spokes/detailing inside wheel */}
                             <line x1="8" y1="10.5" x2="8" y2="14.5" stroke="#0F172A" strokeWidth="0.5" />
                             <line x1="6" y1="12.5" x2="10" y2="12.5" stroke="#0F172A" strokeWidth="0.5" />
                           </g>
                           
-                          {/* Wheel Right Group */}
-                          <g className="wheel-right">
+                          <g className="wheel-right-map">
                             <circle cx="22" cy="12.5" r="2.5" fill="#0F172A" />
                             <circle cx="22" cy="12.5" r="1" fill="#94A3B8" />
-                            {/* Spokes/detailing inside wheel */}
                             <line x1="22" y1="10.5" x2="22" y2="14.5" stroke="#0F172A" strokeWidth="0.5" />
                             <line x1="20" y1="12.5" x2="24" y2="12.5" stroke="#0F172A" strokeWidth="0.5" />
                           </g>
 
                           <defs>
-                            <linearGradient id="busSideBodyGrad" x1="15.5" y1="3" x2="15.5" y2="11.5" gradientUnits="userSpaceOnUse">
+                            <linearGradient id="busSideBodyGradMap" x1="15.5" y1="3" x2="15.5" y2="11.5" gradientUnits="userSpaceOnUse">
                               <stop stopColor="#FF7A45" />
                               <stop stopColor="#D94600" />
                             </linearGradient>
                           </defs>
                         </svg>
                       </div>
+                    </div>
 
-                      {/* Moving Road Dashes underneath */}
-                      <div className="w-12 h-1 overflow-hidden relative mt-1 pointer-events-none">
-                        <div className="absolute inset-y-0 left-0 flex gap-1.5 animate-road-move w-[200%]">
-                          <span className="w-2.5 h-[2px] bg-white/40 rounded-full flex-shrink-0"></span>
-                          <span className="w-2.5 h-[2px] bg-white/40 rounded-full flex-shrink-0"></span>
-                          <span className="w-2.5 h-[2px] bg-white/40 rounded-full flex-shrink-0"></span>
-                          <span className="w-2.5 h-[2px] bg-white/40 rounded-full flex-shrink-0"></span>
-                          <span className="w-2.5 h-[2px] bg-white/40 rounded-full flex-shrink-0"></span>
-                          <span className="w-2.5 h-[2px] bg-white/40 rounded-full flex-shrink-0"></span>
-                          <span className="w-2.5 h-[2px] bg-white/40 rounded-full flex-shrink-0"></span>
-                          <span className="w-2.5 h-[2px] bg-white/40 rounded-full flex-shrink-0"></span>
-                        </div>
-                      </div>
-                      
-                      <span className="text-xl font-bold tracking-tight mt-0.5">88<span className="text-xs text-neutral-400 font-normal">km/h</span></span>
+                    {/* Map Labels */}
+                    <div className="absolute top-3 left-4 bg-black/60 backdrop-blur-sm rounded-md px-2 py-0.5 border border-white/5 select-none pointer-events-none">
+                      <span className="text-[10px] font-bold text-neutral-400">DEPOT: School Start</span>
+                    </div>
+                    <div className="absolute bottom-3 right-4 bg-black/60 backdrop-blur-sm rounded-md px-2 py-0.5 border border-white/5 select-none pointer-events-none">
+                      <span className="text-[10px] font-bold text-[#25D366]">Anand HQ Hub</span>
+                    </div>
+                    
+                    {/* Live Status indicator */}
+                    <div className="absolute bottom-3 left-4 bg-[#25D366]/10 border border-[#25D366]/30 rounded-full px-3 py-1 flex items-center gap-1.5 select-none pointer-events-none">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse"></span>
+                      <span className="text-[10px] font-bold text-[#25D366] uppercase">Active Transit</span>
                     </div>
                   </div>
-                  
+
                   {/* ADAS Alert overlay mockup */}
                   <div className="mt-4 bg-signal-orange/20 border border-signal-orange text-signal-orange px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider animate-pulse flex items-center gap-1.5">
                     <Cpu size={14} /> ADAS: Distance Warning - 3.2m
