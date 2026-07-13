@@ -1,0 +1,111 @@
+import { Check, ChevronRight } from 'lucide-react';
+import { PRODUCTS } from '../constants/products';
+
+interface ProductShowcaseProps {
+  selectedProducts: { [id: string]: number };
+  handleAddProduct: (id: string) => void;
+  handleRemoveProduct: (id: string) => void;
+}
+
+export default function ProductShowcase({ 
+  selectedProducts, 
+  handleAddProduct, 
+  handleRemoveProduct 
+}: ProductShowcaseProps) {
+  return (
+    <section id="products" className="py-24 max-w-7xl mx-auto px-6 md:px-12 text-left">
+      
+      {/* Section Header */}
+      <div className="max-w-2xl mb-16">
+        <div className="flex items-center gap-2 mb-4">
+          <span className="w-2 h-2 rounded-full bg-signal-orange"></span>
+          <span className="text-xs md:text-sm font-bold uppercase tracking-wider text-slate-gray">
+            • HARDWARE & SERVICES CATALOGUE
+          </span>
+        </div>
+        <h2 className="text-3xl md:text-5xl font-medium tracking-tight text-ink-black mb-4">
+          Browse Our 9 Core Solutions
+        </h2>
+        <p className="text-base md:text-lg text-slate-gray leading-relaxed font-normal">
+          Select and bundle GPS modules, active RFID card scanners, ADAS cameras, or custom mobile dashboards to calculate a project cost estimate.
+        </p>
+      </div>
+
+      {/* Grid of 9 Products */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {PRODUCTS.map((prod) => {
+          const qty = selectedProducts[prod.id] || 0;
+          return (
+            <div 
+              key={prod.id} 
+              className="bg-white rounded-[32px] p-8 border border-ink-black/[0.04] hover:shadow-[0_24px_48px_rgba(0,0,0,0.05)] hover:border-ink-black/10 transition-all flex flex-col justify-between"
+            >
+              <div>
+                {/* Header */}
+                <div className="flex justify-between items-start gap-4 mb-6">
+                  <span className="bg-canvas-cream text-ink-black px-4 py-1.5 rounded-full text-sm font-semibold uppercase tracking-wider">
+                    {prod.category}
+                  </span>
+                  <span className="text-2xl md:text-3xl font-bold text-ink-black font-mono">
+                    ${prod.price}
+                  </span>
+                </div>
+
+                {/* Content */}
+                <h3 className="text-xl md:text-2xl font-medium text-ink-black mb-3">
+                  {prod.name}
+                </h3>
+                <p className="text-base text-slate-gray leading-relaxed mb-6 font-normal">
+                  {prod.description}
+                </p>
+
+                {/* Features list */}
+                <ul className="space-y-3 mb-8">
+                  {prod.features.map((feat, fIdx) => (
+                    <li key={fIdx} className="flex items-center gap-2.5 text-sm md:text-base text-ink-black font-normal">
+                      <Check size={16} className="text-signal-orange flex-shrink-0" />
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Actions footer */}
+              <div className="pt-6 border-t border-canvas-cream flex items-center justify-between gap-4">
+                <span className="text-xs md:text-sm text-slate-gray uppercase font-semibold block tracking-wider font-mono truncate max-w-[130px]" title={prod.specs}>
+                  {prod.specs}
+                </span>
+                
+                {qty > 0 ? (
+                  <div className="flex items-center bg-canvas-cream rounded-full p-1.5 border border-ink-black/5">
+                    <button 
+                      onClick={() => handleRemoveProduct(prod.id)}
+                      className="w-8 h-8 rounded-full bg-white text-ink-black flex items-center justify-center font-bold hover:bg-ink-black hover:text-white transition-colors cursor-pointer text-sm"
+                    >
+                      -
+                    </button>
+                    <span className="px-3.5 font-bold font-mono text-sm">{qty}</span>
+                    <button 
+                      onClick={() => handleAddProduct(prod.id)}
+                      className="w-8 h-8 rounded-full bg-white text-ink-black flex items-center justify-center font-bold hover:bg-ink-black hover:text-white transition-colors cursor-pointer text-sm"
+                    >
+                      +
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => handleAddProduct(prod.id)}
+                    className="bg-ink-black text-canvas-cream px-6 py-2.5 rounded-[20px] text-sm font-semibold hover:opacity-90 transition-opacity border border-ink-black inline-flex items-center gap-1.5 cursor-pointer"
+                  >
+                    Add to Quote <ChevronRight size={14} />
+                  </button>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+    </section>
+  );
+}
