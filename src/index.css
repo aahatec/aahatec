@@ -91,11 +91,12 @@ html {
 
 /* Animated active route tracing path */
 .animate-route-draw {
-  animation: routeDraw 8s infinite linear;
+  animation: routeDraw 10s infinite linear;
 }
 @keyframes routeDraw {
   0% { stroke-dashoffset: 300; }
-  93.75%, 100% { stroke-dashoffset: 0; }
+  80%, 90% { stroke-dashoffset: 0; }
+  90.01%, 100% { stroke-dashoffset: 300; }
 }
 
 /* Map wheel rotation styles */

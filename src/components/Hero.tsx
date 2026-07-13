@@ -132,12 +132,12 @@ export default function Hero({ onExploreProducts, onEstimateCost }: HeroProps) {
                       {/* Dynamic Traveling School Bus (Mathematically connected to the active path) */}
                       <g>
                         <animateMotion 
-                          dur="8s" 
+                          dur="10s" 
                           repeatCount="indefinite" 
                           rotate="auto"
                           calcMode="linear"
-                          keyTimes="0; 0.9375; 1"
-                          keyPoints="0; 1; 1"
+                          keyTimes="0; 0.8; 0.9; 0.9001; 1"
+                          keyPoints="0; 1; 1; 0; 0"
                           path="M 40 110 C 90 30 150 140 210 50 C 240 10 280 60 300 80"
                         />
                         {/* Highly Realistic School Bus Vector */}
