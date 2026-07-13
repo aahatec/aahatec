@@ -20,7 +20,7 @@ function ServiceImageWithFallback({ src, alt, fallbackIcon, fallbackText }: Serv
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div className="relative w-full h-full bg-gradient-to-tr from-neutral-900 via-neutral-950 to-neutral-900 flex flex-col items-center justify-center p-6 text-center select-none overflow-hidden rounded-full">
+    <div className="relative w-full h-full bg-gradient-to-tr from-neutral-900 via-neutral-950 to-neutral-900 flex flex-col items-center justify-center p-[3px] text-center select-none overflow-hidden rounded-full">
       {/* Fallback View (visible if image is not yet loaded / has failed to load) */}
       {!loaded && (
         <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-gradient-to-tr from-[#1E1E1E] to-[#141413]">

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -6,13 +6,20 @@ import ProductShowcase from './components/ProductShowcase';
 import Estimator from './components/Estimator';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsOfService from './components/TermsOfService';
 import { PRODUCTS } from './constants/products';
 
 export default function App() {
+  const [currentView, setCurrentView] = useState<'home' | 'privacy' | 'terms'>('home');
   const [selectedProducts, setSelectedProducts] = useState<{ [id: string]: number }>({});
   const [installationEnabled, setInstallationEnabled] = useState(true);
   const [cloudStorageYears, setCloudStorageYears] = useState(1);
   const [apiIntegrationEnabled, setApiIntegrationEnabled] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentView]);
 
   const handleAddProduct = (id: string) => {
     setSelectedProducts(prev => ({
@@ -99,75 +106,96 @@ export default function App() {
     }
   };
 
+  const handleNavigate = (view: 'home' | 'privacy' | 'terms', sectionId?: string) => {
+    setCurrentView(view);
+    if (view === 'home' && sectionId) {
+      setTimeout(() => {
+        scrollToSection(sectionId);
+      }, 100);
+    }
+  };
+
   return (
     <div className="bg-canvas-cream text-ink-black min-h-screen font-mark flex flex-col antialiased selection:bg-light-signal-orange selection:text-white">
       {/* 1. Navbar */}
-      <Navbar onEstimatorScroll={() => scrollToSection('estimator')} />
+      <Navbar onNavigate={handleNavigate} />
 
       <main className="flex-grow">
-        {/* 2. Hero */}
-        <Hero 
-          onExploreProducts={() => scrollToSection('products')}
-          onEstimateCost={() => scrollToSection('estimator')}
-        />
+        {currentView === 'home' && (
+          <>
+            {/* 2. Hero */}
+            <Hero 
+              onExploreProducts={() => scrollToSection('products')}
+              onEstimateCost={() => scrollToSection('estimator')}
+            />
 
-        {/* 3. Core Services (Constellation) */}
-        <Services 
-          onExploreProducts={() => scrollToSection('products')}
-          onEstimatorScroll={() => scrollToSection('estimator')}
-        />
+            {/* 3. Core Services (Constellation) */}
+            <Services 
+              onExploreProducts={() => scrollToSection('products')}
+              onEstimatorScroll={() => scrollToSection('estimator')}
+            />
 
-        {/* 4. Products Grid */}
-        <ProductShowcase 
-          selectedProducts={selectedProducts}
-          handleAddProduct={handleAddProduct}
-          handleRemoveProduct={handleRemoveProduct}
-        />
+            {/* 4. Products Grid */}
+            <ProductShowcase 
+              selectedProducts={selectedProducts}
+              handleAddProduct={handleAddProduct}
+              handleRemoveProduct={handleRemoveProduct}
+            />
 
-        {/* 5. Cost Estimator */}
-        <section id="estimator" className="py-24 bg-[#EBE7E3] border-t border-ink-black/5">
-          <div className="max-w-7xl mx-auto px-6 md:px-12">
-            
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <div className="inline-flex items-center gap-2 mb-4 bg-white/50 px-4 py-1.5 rounded-full border border-white/20">
-                <span className="w-2 h-2 rounded-full bg-signal-orange animate-pulse"></span>
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-gray">INTERACTIVE QUOTATION</span>
+            {/* 5. Cost Estimator */}
+            <section id="estimator" className="py-24 bg-[#EBE7E3] border-t border-ink-black/5">
+              <div className="max-w-7xl mx-auto px-6 md:px-12">
+                
+                <div className="text-center max-w-2xl mx-auto mb-16">
+                  <div className="inline-flex items-center gap-2 mb-4 bg-white/50 px-4 py-1.5 rounded-full border border-white/20">
+                    <span className="w-2 h-2 rounded-full bg-signal-orange animate-pulse"></span>
+                    <span className="text-xs font-bold uppercase tracking-wider text-slate-gray">INTERACTIVE QUOTATION</span>
+                  </div>
+                  <h2 className="text-3xl md:text-5xl font-medium tracking-tight text-ink-black mb-4">
+                    Calculate Your Custom Project Cost
+                  </h2>
+                  <p className="text-base text-slate-gray font-normal">
+                    Assemble your tracking devices, RFID scanners, and app customization tags. Once you review the pricing, click submit to connect directly with our sales team on WhatsApp.
+                  </p>
+                </div>
+
+                <div className="max-w-3xl mx-auto">
+                  <Estimator 
+                    selectedProducts={selectedProducts}
+                    handleAddProduct={handleAddProduct}
+                    handleRemoveProduct={handleRemoveProduct}
+                    installationEnabled={installationEnabled}
+                    setInstallationEnabled={setInstallationEnabled}
+                    cloudStorageYears={cloudStorageYears}
+                    setCloudStorageYears={setCloudStorageYears}
+                    apiIntegrationEnabled={apiIntegrationEnabled}
+                    setApiIntegrationEnabled={setApiIntegrationEnabled}
+                    subtotal={getSubtotal()}
+                    addonsTotal={getAddonsTotal()}
+                    finalTotal={getBaseTotal()}
+                    getWhatsAppLink={getWhatsAppLink}
+                  />
+                </div>
+
               </div>
-              <h2 className="text-3xl md:text-5xl font-medium tracking-tight text-ink-black mb-4">
-                Calculate Your Custom Project Cost
-              </h2>
-              <p className="text-base text-slate-gray font-normal">
-                Assemble your tracking devices, RFID scanners, and app customization tags. Once you review the pricing, click submit to connect directly with our sales team on WhatsApp.
-              </p>
-            </div>
+            </section>
 
-            <div className="max-w-3xl mx-auto">
-              <Estimator 
-                selectedProducts={selectedProducts}
-                handleAddProduct={handleAddProduct}
-                handleRemoveProduct={handleRemoveProduct}
-                installationEnabled={installationEnabled}
-                setInstallationEnabled={setInstallationEnabled}
-                cloudStorageYears={cloudStorageYears}
-                setCloudStorageYears={setCloudStorageYears}
-                apiIntegrationEnabled={apiIntegrationEnabled}
-                setApiIntegrationEnabled={setApiIntegrationEnabled}
-                subtotal={getSubtotal()}
-                addonsTotal={getAddonsTotal()}
-                finalTotal={getBaseTotal()}
-                getWhatsAppLink={getWhatsAppLink}
-              />
-            </div>
+            {/* 6. Location & Contact Details */}
+            <Contact />
+          </>
+        )}
 
-          </div>
-        </section>
+        {currentView === 'privacy' && (
+          <PrivacyPolicy onGoHome={() => handleNavigate('home')} />
+        )}
 
-        {/* 6. Location & Contact Details */}
-        <Contact />
+        {currentView === 'terms' && (
+          <TermsOfService onGoHome={() => handleNavigate('home')} />
+        )}
       </main>
 
       {/* 7. Footer */}
-      <Footer />
+      <Footer onNavigate={handleNavigate} />
 
       {/* Sticky Floating WhatsApp Connect Button with Instant Tooltip */}
       <div className="fixed bottom-6 right-6 z-50 group flex items-center">

@@ -87,7 +87,8 @@ export default function ProductShowcase({
                 </p>
 
                 {/* Features list */}
-                <ul className="space-y-3 mb-8">
+                {/* Features list */}
+                <ul className="space-y-3 mb-6">
                   {prod.features.map((feat, fIdx) => (
                     <li key={fIdx} className="flex items-center gap-2.5 text-sm md:text-base text-ink-black font-normal">
                       <Check size={16} className="text-signal-orange flex-shrink-0" />
@@ -95,26 +96,36 @@ export default function ProductShowcase({
                     </li>
                   ))}
                 </ul>
+
+                {/* Specifications Box */}
+                <div className="mb-8 py-3.5 px-4 bg-canvas-cream/30 rounded-[20px] border border-ink-black/[0.02]">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.08em] text-slate-gray block mb-1">
+                    Specifications
+                  </span>
+                  <span className="text-xs text-ink-black font-mono leading-relaxed block">
+                    {prod.specs}
+                  </span>
+                </div>
               </div>
 
               {/* Actions footer */}
-              <div className="pt-6 border-t border-canvas-cream flex items-center justify-between gap-4">
-                <span className="text-xs md:text-sm text-slate-gray uppercase font-semibold block tracking-wider font-mono truncate max-w-[130px]" title={prod.specs}>
-                  {prod.specs}
-                </span>
-                
+              <div className="pt-6 border-t border-canvas-cream">
                 {qty > 0 ? (
-                  <div className="flex items-center bg-canvas-cream rounded-full p-1.5 border border-ink-black/5">
+                  <div className="flex items-center justify-between bg-canvas-cream rounded-full p-1.5 border border-ink-black/5 w-full">
                     <button 
                       onClick={() => handleRemoveProduct(prod.id)}
-                      className="w-8 h-8 rounded-full bg-white text-ink-black flex items-center justify-center font-bold hover:bg-ink-black hover:text-white transition-colors cursor-pointer text-sm"
+                      className="w-9 h-9 rounded-full bg-white text-ink-black flex items-center justify-center font-bold hover:bg-ink-black hover:text-white transition-colors cursor-pointer text-sm"
+                      aria-label="Decrease quantity"
                     >
                       -
                     </button>
-                    <span className="px-3.5 font-bold font-mono text-sm">{qty}</span>
+                    <span className="px-3 font-bold font-mono text-sm text-ink-black">
+                      {qty} in Quote
+                    </span>
                     <button 
                       onClick={() => handleAddProduct(prod.id)}
-                      className="w-8 h-8 rounded-full bg-white text-ink-black flex items-center justify-center font-bold hover:bg-ink-black hover:text-white transition-colors cursor-pointer text-sm"
+                      className="w-9 h-9 rounded-full bg-white text-ink-black flex items-center justify-center font-bold hover:bg-ink-black hover:text-white transition-colors cursor-pointer text-sm"
+                      aria-label="Increase quantity"
                     >
                       +
                     </button>
@@ -122,7 +133,7 @@ export default function ProductShowcase({
                 ) : (
                   <button
                     onClick={() => handleAddProduct(prod.id)}
-                    className="bg-ink-black text-canvas-cream px-6 py-2.5 rounded-[20px] text-sm font-semibold hover:opacity-90 transition-opacity border border-ink-black inline-flex items-center gap-1.5 cursor-pointer"
+                    className="w-full bg-ink-black text-canvas-cream py-3.5 rounded-[20px] text-sm font-semibold hover:opacity-90 transition-opacity border border-ink-black flex items-center justify-center gap-1.5 cursor-pointer"
                   >
                     Add to Quote <ChevronRight size={14} />
                   </button>

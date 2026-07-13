@@ -53,8 +53,8 @@ export default function Contact() {
                 <div>
                   <h4 className="font-bold text-base md:text-lg text-ink-black">Phone Details</h4>
                   <p className="text-base text-slate-gray mt-1 font-mono font-normal">
-                    <a href="tel:+919427596900" className="hover:text-signal-orange transition-colors font-semibold">+91 94275 96900</a> (Sales & Support)<br />
-                    <a href="tel:+912692230110" className="hover:text-signal-orange transition-colors font-semibold">+91 2692 230110</a> (Office Direct)
+                    <a href="tel:+919427596900" className="text-signal-orange hover:text-light-signal-orange underline decoration-1 underline-offset-4 transition-colors font-semibold">+91 94275 96900</a> (Sales & Support)<br />
+                    <a href="tel:+912692230110" className="text-signal-orange hover:text-light-signal-orange underline decoration-1 underline-offset-4 transition-colors font-semibold">+91 2692 230110</a> (Office Direct)
                   </p>
                 </div>
               </div>
@@ -66,8 +66,8 @@ export default function Contact() {
                 <div>
                   <h4 className="font-bold text-base md:text-lg text-ink-black">Email & Help Desk</h4>
                   <p className="text-base text-slate-gray mt-1 font-mono font-normal">
-                    <a href="mailto:sales@aahatec.com" className="hover:text-signal-orange transition-colors font-semibold">sales@aahatec.com</a> (Enterprise Quotes)<br />
-                    <a href="mailto:support@aahatec.com" className="hover:text-signal-orange transition-colors font-semibold">support@aahatec.com</a> (Technical Support)
+                    <a href="mailto:sales@aahatec.com" className="text-signal-orange hover:text-light-signal-orange underline decoration-1 underline-offset-4 transition-colors font-semibold">sales@aahatec.com</a> (Enterprise Quotes)<br />
+                    <a href="mailto:support@aahatec.com" className="text-signal-orange hover:text-light-signal-orange underline decoration-1 underline-offset-4 transition-colors font-semibold">support@aahatec.com</a> (Technical Support)
                   </p>
                 </div>
               </div>
