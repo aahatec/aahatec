@@ -54,13 +54,13 @@ export default function App() {
     if (totalQty === 0) return 0;
     
     if (installationEnabled) {
-      sum += totalQty * 25; // $25 installation per hardware unit
+      sum += totalQty * 2000; // ₹2,000 installation per hardware unit
     }
     if (cloudStorageYears > 0 && cloudStorageYears !== 999) {
-      sum += totalQty * (20 * cloudStorageYears); // $20/yr cloud storage per unit
+      sum += totalQty * (1600 * cloudStorageYears); // ₹1,600/yr cloud storage per unit
     }
     if (apiIntegrationEnabled) {
-      sum += 499; // flat enterprise API setup fee
+      sum += 40000; // flat enterprise API setup fee
     }
     return sum;
   };
@@ -77,22 +77,22 @@ export default function App() {
     Object.entries(selectedProducts).forEach(([id, qty]) => {
       const product = PRODUCTS.find(p => p.id === id);
       if (product) {
-        message += `• ${product.name} (Qty: ${qty}) - $${(product.price * qty).toLocaleString()}\n`;
+        message += `• ${product.name} (Qty: ${qty}) - ₹${(product.price * qty).toLocaleString('en-IN')}\n`;
       }
     });
 
     message += `\nAdd-ons:\n`;
-    if (installationEnabled) message += `- Professional Installation ($25/unit included)\n`;
+    if (installationEnabled) message += `- Professional Installation (₹2,000/unit included)\n`;
     if (cloudStorageYears > 0) {
       if (cloudStorageYears === 999) {
         message += `- GPS Cloud Storage: Large Deployment (Contact Required)\n`;
       } else {
-        message += `- ${cloudStorageYears} Year(s) GPS Cloud Subscription\n`;
+        message += `- ${cloudStorageYears} Year(s) GPS Cloud Subscription (₹1,600/unit/yr)\n`;
       }
     }
-    if (apiIntegrationEnabled) message += `- Custom ERP/API Integration\n`;
+    if (apiIntegrationEnabled) message += `- Custom ERP/API Integration (₹40,000 flat)\n`;
     
-    message += `\nEstimated Project Total: $${finalTotal.toLocaleString()}\n`;
+    message += `\nEstimated Project Total: ₹${finalTotal.toLocaleString('en-IN')}\n`;
     message += `Chat ID: AAHA-EST-${Math.floor(Math.random() * 90000 + 10000)}\n`;
     message += `Please advise on hardware lead times and shipping. Thank you!`;
 

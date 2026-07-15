@@ -60,7 +60,7 @@ export default function Estimator({
                 <div key={id} className="flex items-center justify-between gap-4 p-4 bg-canvas-cream/30 rounded-[20px] border border-ink-black/[0.02]">
                   <div className="text-left">
                     <h4 className="font-semibold text-base text-ink-black">{product.name}</h4>
-                    <p className="text-sm text-slate-gray mt-0.5 font-mono">${product.price} each</p>
+                    <p className="text-sm text-slate-gray mt-0.5 font-mono">₹{product.price.toLocaleString('en-IN')} each</p>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="flex items-center bg-white rounded-full p-1 border border-ink-black/5">
@@ -79,7 +79,7 @@ export default function Estimator({
                       </button>
                     </div>
                     <span className="font-bold text-base font-mono text-ink-black min-w-[70px] text-right">
-                      ${(product.price * qty).toLocaleString()}
+                      ₹{(product.price * qty).toLocaleString('en-IN')}
                     </span>
                   </div>
                 </div>
@@ -105,7 +105,7 @@ export default function Estimator({
               />
               <div>
                 <span className="text-base font-semibold text-ink-black">Professional Installation Support</span>
-                <p className="text-sm text-slate-gray mt-0.5">On-site setup and vehicle calibration ($25 / unit)</p>
+                <p className="text-sm text-slate-gray mt-0.5">On-site setup and vehicle calibration (₹2,000 / unit)</p>
               </div>
             </div>
             <span className="font-mono text-sm font-semibold text-slate-gray">
@@ -126,9 +126,9 @@ export default function Estimator({
                 className="w-full bg-white border-2 border-slate-200 rounded-[14px] pl-4 pr-10 py-2.5 text-sm font-bold text-ink-black appearance-none cursor-pointer hover:border-signal-orange hover:shadow-sm transition-all focus:outline-none focus:border-signal-orange focus:ring-1 focus:ring-signal-orange"
               >
                 <option value={0}>Disabled</option>
-                <option value={1}>1 Year ($20/unit)</option>
-                <option value={2}>2 Years ($40/unit)</option>
-                <option value={3}>3 Years ($60/unit)</option>
+                <option value={1}>1 Year (₹1,600/unit)</option>
+                <option value={2}>2 Years (₹3,200/unit)</option>
+                <option value={3}>3 Years (₹4,800/unit)</option>
                 <option value={999}>Large (Contact Us)</option>
               </select>
               {/* Custom SVG Chevron Down */}
@@ -155,7 +155,7 @@ export default function Estimator({
               </div>
             </div>
             <span className="font-mono text-sm font-semibold text-slate-gray">
-              {apiIntegrationEnabled ? '+$499 Flat' : 'Disabled'}
+              {apiIntegrationEnabled ? '+₹40,000 Flat' : 'Disabled'}
             </span>
           </label>
         </div>
@@ -165,12 +165,12 @@ export default function Estimator({
       <div className="mt-10 pt-6 border-t-2 border-dashed border-canvas-cream">
         <div className="flex justify-between items-center text-base text-slate-gray mb-2.5 font-normal">
           <span>Base Equipment Subtotal:</span>
-          <span className="font-mono font-bold">${subtotal.toLocaleString()}</span>
+          <span className="font-mono font-bold">₹{subtotal.toLocaleString('en-IN')}</span>
         </div>
         
         <div className="flex justify-between items-center text-base text-slate-gray mb-3.5 font-normal">
           <span>Add-ons & Deployment:</span>
-          <span className="font-mono font-bold">${addonsTotal.toLocaleString()}</span>
+          <span className="font-mono font-bold">₹{addonsTotal.toLocaleString('en-IN')}</span>
         </div>
 
         {cloudStorageYears === 999 && (
@@ -185,7 +185,7 @@ export default function Estimator({
             <span className="text-xs md:text-sm text-neutral-400 font-normal italic">*Subject to final shipping rates</span>
           </div>
           <span className="text-3xl md:text-5xl font-bold font-mono text-ink-black">
-            ${finalTotal.toLocaleString()}
+            ₹{finalTotal.toLocaleString('en-IN')}
           </span>
         </div>
 

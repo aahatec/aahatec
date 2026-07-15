@@ -76,7 +76,7 @@ export default function TermsOfService({ onGoHome }: TermsOfServiceProps) {
           <section>
             <h3 className="text-xl md:text-2xl font-medium text-ink-black mb-4">2. Hardware Installation & Maintenance</h3>
             <p>
-              Optional installation services ($25 per hardware unit) cover standard vehicle calibration, windshield tag mounting, and interface testing. Maintenance, firmware updates, and calibration resets are scheduled periodically. Tampering with internal SIM slots or hardware tags voids the 12-month replacement warranty.
+              Optional installation services (₹2,000 per hardware unit) cover standard vehicle calibration, windshield tag mounting, and interface testing. Maintenance, firmware updates, and calibration resets are scheduled periodically. Tampering with internal SIM slots or hardware tags voids the 12-month replacement warranty.
             </p>
           </section>
 

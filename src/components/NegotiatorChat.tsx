@@ -76,7 +76,7 @@ export default function NegotiatorChat({
           setNegotiationStep(1);
           setChatMessages(prev => [...prev, {
             sender: 'bot',
-            text: `Perfect! Based on your selected hardware and services (totaling ${totalQty} items, with a base cost of $${baseTotal.toLocaleString()}), I'm authorized to apply an AI-negotiated ${calculatedDiscount}% bundle discount on your hardware items! This will save you $${(subtotal * (calculatedDiscount / 100)).toFixed(0)} and bring your total estimate down to $${(baseTotal - subtotal * (calculatedDiscount / 100)).toLocaleString()}. Does this sound like a fair deal to you?`,
+            text: `Perfect! Based on your selected hardware and services (totaling ${totalQty} items, with a base cost of ₹${baseTotal.toLocaleString('en-IN')}), I'm authorized to apply an AI-negotiated ${calculatedDiscount}% bundle discount on your hardware items! This will save you ₹${Number((subtotal * (calculatedDiscount / 100)).toFixed(0)).toLocaleString('en-IN')} and bring your total estimate down to ₹${(baseTotal - subtotal * (calculatedDiscount / 100)).toLocaleString('en-IN')}. Does this sound like a fair deal to you?`,
             timestamp: new Date(),
             isOfferButton: true
           }]);
@@ -87,7 +87,7 @@ export default function NegotiatorChat({
           setNegotiationStep(2);
           setChatMessages(prev => [...prev, {
             sender: 'bot',
-            text: `I understand you're looking for the absolute best value. Because vehicle safety and RFID logistics are long-term operational investments, we build extremely robust, industrial-grade hardware. I can push our system limits to a final ${higherDiscount}% hardware discount for you. This brings your new total to $${(baseTotal - subtotal * (higherDiscount / 100)).toLocaleString()}! Let's lock this in before the system resets. Shall we proceed?`,
+            text: `I understand you're looking for the absolute best value. Because vehicle safety and RFID logistics are long-term operational investments, we build extremely robust, industrial-grade hardware. I can push our system limits to a final ${higherDiscount}% hardware discount for you. This brings your new total to ₹${(baseTotal - subtotal * (higherDiscount / 100)).toLocaleString('en-IN')}! Let's lock this in before the system resets. Shall we proceed?`,
             timestamp: new Date(),
             isOfferButton: true
           }]);

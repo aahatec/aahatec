@@ -74,7 +74,7 @@ export default function ProductShowcase({
                     {prod.category}
                   </span>
                   <span className="text-2xl md:text-3xl font-bold text-ink-black font-mono">
-                    ${prod.price}
+                    ₹{prod.price.toLocaleString('en-IN')}
                   </span>
                 </div>
 
