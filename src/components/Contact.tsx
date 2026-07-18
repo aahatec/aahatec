@@ -32,11 +32,11 @@ export default function Contact() {
                   <h4 className="font-bold text-base md:text-lg text-ink-black">Office Address</h4>
                   <p className="text-base text-slate-gray mt-1 leading-relaxed font-normal">
                     Aahatec Office,<br />
-                    102, Sharnam Status, Near APC,<br />
-                    Anand - Vidyanagar Road, Anand, Gujarat, 388001
+                    303, Ambd Gold, Opp. Amul Dairy,<br />
+                    Old Civil Court Road, Anand, Gujarat, 388001
                   </p>
                   <a 
-                    href="https://maps.app.goo.gl/2zu1BjRUvqSgKx3R7" 
+                    href="https://www.google.com/maps/search/?api=1&query=303%2C+Ambd+Gold%2C+Opp+Amul+Dairy%2C+Old+Civil+Ct+Road%2C+ANAND+388001%2C+Gujarat%2C+India" 
                     target="_blank" 
                     rel="noreferrer" 
                     className="text-sm font-bold text-signal-orange hover:text-light-signal-orange transition-colors mt-2.5 inline-block"
